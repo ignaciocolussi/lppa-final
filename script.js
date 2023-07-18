@@ -33,7 +33,7 @@ botonReinicio.addEventListener('click', reiniciarJuego);
 
 // Handler para los clicks de los botones
 function handleButtonClick(event) {
-  if (mostrandoSecuencia || juegoPausado || juegoFinalizado) return;
+  if (mostrandoSecuencia || juegoPausado || juegoFinalizado || !timer) return;
 
   var boton = event.target;
   var indiceBoton = Array.from(botones).indexOf(boton) + 1;
@@ -59,7 +59,7 @@ function handleButtonClick(event) {
     guardarMayorPuntaje({puntaje: puntaje, nivel: nivel});
     generarSiguienteBoton();
     reiniciarTemporizador();
-    setTimeout(MostrarSecuencia, 1000);
+    setTimeout(MostrarSecuencia, 2000);
   }
 }
 
@@ -68,7 +68,7 @@ function feedbackBoton(boton) {
   boton.style.opacity = 1;
   setTimeout(function() {
     boton.style.opacity = 0.3;
-  }, 300);
+  }, 1000);
 }
 
 // Funcion para checkear que la sucuencia que introdujo el jugador es correcta
@@ -83,10 +83,15 @@ function checkearSecuencia() {
 
 // Mostrar la sucuencia generada al jugador para que la repita
 function MostrarSecuencia() {
+
   mostrandoSecuencia = true;
-  mensaje.textContent = 'Debes memorizar la secuncia y repetirla.';
+  mensaje.textContent = 'Debes memorizar la secuencia y repetirla.';
 
   var indice = 0;
+  // recorro todos los botones para sacar la propiedad focus de cada uno 
+  for (const boton of botones) {
+    boton.blur();
+  }
   var intervalo = setInterval(function() {
     var indiceBoton = secuencia[indice];
     feedbackBoton(botones[indiceBoton - 1]);
@@ -185,6 +190,7 @@ function togglePausa() {
 function reiniciarJuego() {
   juegoFinalizado = false;
   juegoPausado = false;
+  reiniciarTemporizador();
   iniciarJuego();
 }
 
