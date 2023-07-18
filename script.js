@@ -89,6 +89,7 @@ function MostrarSecuencia() {
     if (indice >= secuencia.length) {
       clearInterval(intervalo);
       mostrandoSecuencia = false;
+      mensaje.textContent = 'Repite la secuencia!';
       iniciarTemporizador();
     }
   }, 1000);
@@ -104,6 +105,7 @@ function generarSiguienteBoton() {
 function reiniciarTemporizador() {
   tiempoRestante = 20;
   tiempoValor.textContent = tiempoRestante;
+  pararTemporizador();
 }
 
 // Iniciar el juego
@@ -121,6 +123,7 @@ function iniciarJuego() {
   botonInicio.disabled = true;
   botonPausa.disabled = false;
   botonReinicio.disabled = false;
+  timer = null;
 
   generarSiguienteBoton();
   MostrarSecuencia();
@@ -134,11 +137,12 @@ function terminarJuego() {
   botonPausa.disabled = true;
   botonReinicio.disabled = false;
   pararTemporizador();
+  juegoPausado = true;
 }
 
 // Funciones del temporizador
 function iniciarTemporizador() {
-  var timer = setInterval(function() {
+ timer = setInterval(function() {
     tiempoRestante--;
     tiempoValor.textContent = tiempoRestante;
 
