@@ -12,11 +12,15 @@ var tiempoRestante = 20;
 // Capturo elementos del DOM para manipular mas tarde
 var botones = document.getElementsByClassName('boton');
 var puntajeValor = document.getElementById('puntajeValor');
+var nivelValor = document.getElementById('nivelValor');
 var botonInicio = document.getElementById('inicio');
 var botonPausa = document.getElementById('pausa');
 var botonReinicio = document.getElementById('reinicio');
 var mensaje = document.getElementById('info');
 var tiempoValor = document.getElementById('tiempo');
+var nivelMaximoValor = document.getElementById('nivelMaximoValor');
+var puntajeMaximoValor = document.getElementById('puntajeMaximoValor');
+var infoTiempo = document.getElementById('infoTiempo');
 
 // Agrego los eventos a los botones
 for (var i = 0; i < botones.length; i++) {
@@ -49,8 +53,10 @@ function handleButtonClick(event) {
   if (secuenciaJugador.length === secuencia.length) {
     nivel++;
     secuenciaJugador = [];
-    mensaje.textContent = 'Felicitaciones!. Siguiente nivel ==> ' + nivel;
+    mensaje.textContent = 'Felicitaciones!. Siguiente nivel: ' + nivel;
+    nivelValor.textContent = nivel;
     pararTemporizador();
+    guardarMayorPuntaje({puntaje: puntaje, nivel: nivel});
     generarSiguienteBoton();
     reiniciarTemporizador();
     setTimeout(MostrarSecuencia, 1000);
@@ -120,10 +126,13 @@ function iniciarJuego() {
   secuenciaJugador = [];
   puntajeValor.textContent = puntaje;
   mensaje.textContent = 'Debes memorizar la secuencia y repetirla';
+  nivelValor.textContent = nivel;
   botonInicio.disabled = true;
   botonPausa.disabled = false;
   botonReinicio.disabled = false;
   timer = null;
+  infoTiempo.classList.remove('none');
+  obtenerMayorPuntaje();
 
   generarSiguienteBoton();
   MostrarSecuencia();
@@ -172,9 +181,26 @@ function togglePausa() {
   }
 }
 
-// Restart the game
+// Reiniciar el juego
 function reiniciarJuego() {
   juegoFinalizado = false;
   juegoPausado = false;
   iniciarJuego();
+}
+
+// Guardar el mayor puntaje en el local storage
+function guardarMayorPuntaje(puntaje) {
+  if(!localStorage.getItem('mayorPuntaje') || puntaje.puntaje > res.puntaje)  {
+    localStorage.setItem('mayorPuntaje', JSON.stringify(puntaje));
+    obtenerMayorPuntaje();
+  }
+}
+
+// Obtener el mayor puntaje del local storage y mostrarlo 
+function obtenerMayorPuntaje() {
+  var mayorPuntaje = localStorage.getItem('mayorPuntaje');
+  res = JSON.parse(mayorPuntaje);
+  nivelMaximoValor.textContent = res.nivel;
+  puntajeMaximoValor.textContent = res.puntaje;
+
 }
