@@ -1,0 +1,88 @@
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  #simon {
+    margin: 50px auto;
+    max-width: 400px;
+    background-color: #f0f0f0;
+    border: 5px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  
+  #score {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  #info {
+    margin-bottom: 20px;
+  }
+  
+  #containerBotones {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+  }
+  
+  .boton {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    opacity: 0.3;
+    transition: opacity 0.3s;
+  }
+
+  #controles{
+    margin-bottom: 2rem;
+  }
+  
+  .boton:focus {
+    outline: none;
+  }
+  
+  #controles boton {
+    margin: 0 10px;
+  }
+  
+  #controles boton:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  #boton1 {
+    background-color: #ff0000;
+  }
+
+    #boton2 {
+        background-color: #00ff00;
+    }
+
+    #boton3 {
+        background-color: #0000ff;
+    }
+
+    #boton4 {
+        background-color: #ffff00;
+    }
+
+    #boton1.active {
+        background-color: #ff6666;
+    }
+
+    #boton2.active {
+        background-color: #66ff66;
+    }
+
+    #boton3.active {
+        background-color: #6666ff;
+    }
+
+    #boton4.active {
+        background-color: #ffff66;
+    }
+
