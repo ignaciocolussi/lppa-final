@@ -60,6 +60,7 @@ body {
   }
 
   
+
   #containerBotones {
     display: flex;
     justify-content: space-evenly;
@@ -85,13 +86,26 @@ body {
     outline: none;
   }
   
-  #controles boton {
+  #controles button {
     margin: 0 10px;
+    width: 100px;
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    
+    opacity: 0.7;
+    transition: opacity 0.3s;
+    background-color : #ccc;
+    color: #161616;
   }
   
-  #controles boton:disabled {
+  #controles button:disabled {
     opacity: 0.3;
     cursor: not-allowed;
+  }
+  #controles button:hover:enabled {
+    opacity: 1;
+    cursor: pointer;
   }
 
   #boton1 {
