@@ -48,7 +48,7 @@ botonReanudarModal.addEventListener('click', togglePausa);
 // Handler para el input del nombre del jugador
 function handleInputJugador(event) {
   var nombreJugador = event.target.value;
-  botonModal.disabled = nombreJugador.length === 0;
+  botonModal.disabled = nombreJugador.length < 3;
 }
 
 // Handler para el click del boton del modal
