@@ -2,8 +2,6 @@
 console.debug('Juego Simon Dice');
 
 // Establezo las variables del juego
-
-
 var secuencia = [];
 var secuenciaJugador = [];
 var nivel = 0;
@@ -12,6 +10,7 @@ var juegoPausado = false;
 var juegoFinalizado = false;
 var mostrandoSecuencia = false;
 var puntaje = 0;
+var penalizacion = 0;
 var tiempoRestante = 20;
 
 // Capturo elementos del DOM para manipular mas tarde
@@ -77,7 +76,7 @@ function handleButtonClick(event) {
     return;
   }
 
-  puntaje++;
+  puntaje = puntaje + secuenciaJugador.length;
   puntajeValor.textContent = puntaje;
 
   if (secuenciaJugador.length === secuencia.length) {
@@ -165,7 +164,7 @@ function iniciarJuego() {
   timer = null;
   infoTiempo.classList.remove('none');
   obtenerMayorPuntaje();
-
+  penalizacion()
   generarSiguienteBoton();
   MostrarSecuencia();
 }
@@ -177,6 +176,8 @@ function terminarJuego() {
   botonInicio.disabled = false;
   botonPausa.disabled = true;
   pararTemporizador();
+  penalizacion();
+  puntaje = puntaje - penalizacion;
   guardarMayorPuntaje({puntaje: puntaje, nivel: nivel});
   juegoPausado = true;
   modalEventos.classList.add('fade-in');
@@ -262,4 +263,10 @@ function obtenerMayorPuntaje() {
   }
 
 
+}
+
+function penalizacion(){
+  if (tiempoRestante <= 9){
+    penalizacion = penalizacion + 10 - tiempoRestante;
+  }
 }
