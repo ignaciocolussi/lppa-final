@@ -137,22 +137,20 @@ h5	{
   .bg-light{
     background-color: #f0f0f0;
   }
-  /* .flex-col{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 2rem;
-    
-  } */
+
   
   #simon {
     min-width: min-content; 
     max-width: 400px;
     background-color: #161616;
-    
+
+  }
+
+  #containerJuego{
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
   }
 
   .border{
@@ -233,25 +231,25 @@ h5	{
 
   #boton1 {
     background-color: #ff0000;
-    border-radius: 10px;
+    border-radius: 5px;
     border-top-left-radius: 100%;
   }
 
     #boton2 {
         background-color: #00ff00;
-        border-radius: 10px;
+        border-radius: 5px;
         border-top-right-radius: 100%;
     }
 
     #boton3 {
         background-color: #0000ff;
-        border-radius: 10px;
+        border-radius: 5px;
         border-bottom-left-radius: 100%;
     }
 
     #boton4 {
         background-color: #ffff00;
-        border-radius: 10px;
+        border-radius: 5px;
         border-bottom-right-radius: 100%;
     }
 
@@ -277,6 +275,21 @@ h5	{
         outline: #ffff66 solid 10px;
     }
 
+
+    .middle-circle{
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 5vw;
+      height: 5vw;
+      max-width: 10vh;
+      max-height: 10vh;
+      border-radius: 50%;
+      background-color: #161616;
+    }
+
+   
 
     .btn-inicial:hover:not(:disabled) {
       opacity: 1;
@@ -333,4 +346,6 @@ h5	{
       
     }
   
-    
+
+
+  
