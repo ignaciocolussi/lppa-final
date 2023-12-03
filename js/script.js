@@ -189,6 +189,9 @@ function iniciarTemporizador() {
  timer = setInterval(function() {
     tiempoRestante--;
     tiempoValor.textContent = tiempoRestante;
+    if (tiempoRestante <= 10) {
+      tiempoValor.style.color = 'red';
+    }
 
     if (tiempoRestante === 0) {
       pararTemporizador();
