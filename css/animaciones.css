@@ -5,6 +5,21 @@
     100% {color: green;}
   }
 
+  
+  @keyframes fade-out {
+    100% {
+      opacity: 0;
+      display: none;
+    }
+  }
+
+  @keyframes fade-in-flex {
+    100% {
+      opacity: 1;
+      display: flex;
+    }
+  }
+
  header h1{
     animation-name: titulo;
     animation-duration: 5s;
@@ -17,10 +32,10 @@
 
   }
 
+  .fade-in-flex {
+    animation: fade-in-flex 0.5s forwards;
+ 
+   }
+ 
 
-  @keyframes fade-out {
-    100% {
-      opacity: 0;
-      display: none;
-    }
-  }
+

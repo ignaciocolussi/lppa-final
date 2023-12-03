@@ -24,7 +24,9 @@ var puntajeValor = document.getElementById('puntajeValor');
 var nivelValor = document.getElementById('nivelValor');
 var botonInicio = document.getElementById('inicio');
 var botonPausa = document.getElementById('pausa');
+var botonReanudarModal = document.getElementById('reanudar');
 var botonReinicio = document.getElementById('reinicio');
+var modalEventos = document.getElementById('eventos');
 var mensaje = document.getElementById('info');
 var tiempoValor = document.getElementById('tiempo');
 var nivelMaximoValor = document.getElementById('nivelMaximoValor');
@@ -43,6 +45,7 @@ for (var i = 0; i < botones.length; i++) {
 botonInicio.addEventListener('click', iniciarJuego);
 botonPausa.addEventListener('click', togglePausa);
 botonReinicio.addEventListener('click', reiniciarJuego);
+botonReanudarModal.addEventListener('click', togglePausa);
 
 // Handler para el input del nombre del jugador
 function handleInputJugador(event) {
@@ -160,7 +163,6 @@ function iniciarJuego() {
   secuencia = [];
   secuenciaJugador = [];
   puntajeValor.textContent = puntaje;
-  mensaje.textContent = 'Debes memorizar la secuencia y repetirla';
   nivelValor.textContent = nivel;
   botonInicio.disabled = true;
   botonPausa.disabled = false;
@@ -181,6 +183,7 @@ function terminarJuego() {
   botonPausa.disabled = true;
   botonReinicio.disabled = false;
   pararTemporizador();
+  guardarMayorPuntaje({puntaje: puntaje, nivel: nivel});
   juegoPausado = true;
 }
 
@@ -205,13 +208,16 @@ function pararTemporizador() {
 function togglePausa() {
   if (juegoPausado) {
     juegoPausado = false;
+    modalEventos.classList.remove('fade-in');
+    modalEventos.classList.add('fade-out');
     botonPausa.textContent = 'Pausa';
-    mensaje.textContent = 'Debes memorizar la secuencia y repetirla';
     iniciarTemporizador();
   } else {
     juegoPausado = true;
     botonPausa.textContent = 'Continuar';
     mensaje.textContent = 'Juego en pausa';
+    modalEventos.classList.remove('fade-out');
+    modalEventos.classList.add('fade-in');
     pararTemporizador();
   }
 }
@@ -226,7 +232,11 @@ function reiniciarJuego() {
 
 // Guardar el mayor puntaje en el local storage
 function guardarMayorPuntaje(puntaje) {
+  var mayorPuntaje = localStorage.getItem('mayorPuntaje');
+  var res = JSON.parse(mayorPuntaje);
   if(!localStorage.getItem('mayorPuntaje') || puntaje.puntaje > res.puntaje)  {
+    var jugador = localStorage.getItem('nombreJugador', nombreJugador)
+    puntaje.jugador = jugador;
     localStorage.setItem('mayorPuntaje', JSON.stringify(puntaje));
     obtenerMayorPuntaje();
   }
@@ -235,8 +245,15 @@ function guardarMayorPuntaje(puntaje) {
 // Obtener el mayor puntaje del local storage y mostrarlo 
 function obtenerMayorPuntaje() {
   var mayorPuntaje = localStorage.getItem('mayorPuntaje');
-  res = JSON.parse(mayorPuntaje);
-  nivelMaximoValor.textContent = res.nivel;
-  puntajeMaximoValor.textContent = res.puntaje;
+  if (!mayorPuntaje) {
+    nivelMaximoValor.textContent = 0;
+    puntajeMaximoValor.textContent = 0;
+    localStorage.setItem('mayorPuntaje', JSON.stringify({puntaje: 0, nivel: 0}));
+  }else{
+    var res = JSON.parse(mayorPuntaje);
+    nivelMaximoValor.textContent = res.nivel;
+    puntajeMaximoValor.textContent = res.puntaje;
+  }
+
 
 }
