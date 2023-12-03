@@ -1,4 +1,9 @@
+'use strict';
+console.debug('Juego Simon Dice');
+
 // Establezo las variables del juego
+
+
 var secuencia = [];
 var secuenciaJugador = [];
 var nivel = 0;
@@ -10,6 +15,10 @@ var puntaje = 0;
 var tiempoRestante = 20;
 
 // Capturo elementos del DOM para manipular mas tarde
+var modal = document.getElementsByClassName('modal')[0];
+var botonModal = document.getElementsByClassName('btn-inicial')[0];
+var inputInfoJugador = document.getElementById('nombreJugador');
+var seccionJuego = document.getElementById('juego');
 var botones = document.getElementsByClassName('boton');
 var puntajeValor = document.getElementById('puntajeValor');
 var nivelValor = document.getElementById('nivelValor');
@@ -22,7 +31,11 @@ var nivelMaximoValor = document.getElementById('nivelMaximoValor');
 var puntajeMaximoValor = document.getElementById('puntajeMaximoValor');
 var infoTiempo = document.getElementById('infoTiempo');
 
-// Agrego los eventos a los botones
+// Agrego los eventos 
+inputInfoJugador.addEventListener('keyup', handleInputJugador);
+botonModal.addEventListener('click', handleModalClick);
+
+
 for (var i = 0; i < botones.length; i++) {
   botones[i].addEventListener('click', handleButtonClick);
 }
@@ -30,6 +43,23 @@ for (var i = 0; i < botones.length; i++) {
 botonInicio.addEventListener('click', iniciarJuego);
 botonPausa.addEventListener('click', togglePausa);
 botonReinicio.addEventListener('click', reiniciarJuego);
+
+// Handler para el input del nombre del jugador
+function handleInputJugador(event) {
+  var nombreJugador = event.target.value;
+  botonModal.disabled = nombreJugador.length === 0;
+}
+
+// Handler para el click del boton del modal
+function handleModalClick() {
+  var nombreJugador = inputInfoJugador.value;
+  localStorage.setItem('nombreJugador', nombreJugador);  
+  botonInicio.disabled = false;
+  botonPausa.disabled = true;
+  botonReinicio.disabled = true;
+  modal.classList.add('fade-out');
+  
+}
 
 // Handler para los clicks de los botones
 function handleButtonClick(event) {
