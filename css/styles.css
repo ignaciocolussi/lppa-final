@@ -357,17 +357,24 @@ h5	{
       color: #ccc;
       margin-top: 1rem;
       padding: 2rem;
+      display: flex;
+      flex-direction: row;
     }
 
     footer a {
       color: #161616;
       text-decoration: none;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       padding: 1rem;
       border-radius: 5px;
       transition: all 0.3s ease-in-out;
+    }
+
+    footer a > span{
+      margin-top: .5rem;
     }
 
     footer a:hover {
@@ -380,6 +387,32 @@ h5	{
       width: 2rem;
       height: 2rem;
       margin: 0 1rem;
+    }
+
+    footer .column{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: space-around;
+    }
+
+    footer .column > p,  footer .column >span{
+      color: #161616;
+    }
+
+    footer .row{
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .divider{
+          
+      border-left: 1px solid #ccc;
+      margin: 1rem;
+     
     }
 
    
