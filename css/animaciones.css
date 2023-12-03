@@ -1,0 +1,12 @@
+@keyframes titulo {
+    0%   {color: rgb(236, 0, 0);}
+    25%  {color: yellow;}
+    50%  {color: blue;}
+    100% {color: green;}
+  }
+
+ header h1{
+    animation-name: titulo;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+  }
