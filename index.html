@@ -15,7 +15,6 @@
   <header>
     <div class="border bg-light">
       <h1 id="titulo">SIMON</h1>
-      <div id="infoTiempo" class="none">Tiempo restante: <span id="tiempo"></span></div>
     </div>
   </header>
  
@@ -61,19 +60,27 @@
       
       </div>
     
-        
-        
-      <section class="border" id="puntajes">
+      <section  id="metricas">
+        <div class="border bg-dark">
+        <h2 id="infoTiempo" class="">Tiempo restante</h2> 
+        <p id="tiempo"></p>
+        </div>
+
+        <div class="border bg-dark">
         <h2>Tabla de puntajes</h2>
       
-        <div class="puntaje">
+        <div class="puntaje" id="puntajes">
           <h3 class="titulo">Puntaje actual</h3>
           <p id="puntajeActual">Nivel: <span id="nivelValor">0</span> Puntaje: <span id="puntajeValor">0</span></p>
           <h3 class="titulo">Puntaje máximo</h3>
           <p id="puntajeMaximo">Nivel: <span id="nivelMaximoValor">0</span> Puntaje: <span id="puntajeMaximoValor">0</span></p>
           <button id="verTabla" class="btn-inicial">Tabla de posiciones</button>
         </div>
+      </div>
       </section>
+        
+        
+     
     </div>
     </div>
     </section>

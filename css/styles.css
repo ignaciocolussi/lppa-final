@@ -206,7 +206,6 @@ h5	{
     margin-bottom: 2rem;
   }
   
-
   
  button {
     margin: 0 10px;
@@ -303,16 +302,33 @@ h5	{
         display: none;
     }
     
-    #puntajes{
+    .bg-dark{
+      background-color: #161616;
+    }
+
+    .bg-dark h2, .bg-dark p{
+      color: #ccc;
+    }
+
+    #metricas{
         display: flex;
-        width: 20rem;
+        min-width: 20rem;
         justify-content: space-evenly;
         flex-direction: column;
         align-items: center;
+        justify-content: center;     
+    }
+
+    #metricas div{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         justify-content: center;
-        background-color: #161616;
-        color: #ccc;
-       
+        gap: 1rem;
+    }
+
+    #metricas #tiempo{
+     font-size: 2rem;
     }
 
     #puntajes h2{
@@ -433,6 +449,10 @@ h5	{
         
         header div{
           width: 100%;
+        }
+
+        #metricas div {
+          width: 30rem;
         }
         
       
