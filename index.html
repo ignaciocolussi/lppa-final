@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oxanium">
   <link rel="stylesheet" type="text/css" href="css/styles.css">
   <link rel="stylesheet" type="text/css" href="css/animaciones.css">
+  <link rel="stylesheet" type="text/css" href="css/tabla.css">
 </head>
 <body>
   <header>
@@ -38,10 +39,6 @@
     
     <section id="juego" class="">
       <div class="border bg-light">
-        
-      
-     
-  
        <div class="flex">      
         <div class="border" id="simon">
         <div id="controles">
@@ -74,10 +71,34 @@
           <p id="puntajeActual">Nivel: <span id="nivelValor">0</span> Puntaje: <span id="puntajeValor">0</span></p>
           <h3 class="titulo">Puntaje máximo</h3>
           <p id="puntajeMaximo">Nivel: <span id="nivelMaximoValor">0</span> Puntaje: <span id="puntajeMaximoValor">0</span></p>
+          <button id="verTabla" class="btn-inicial">Tabla de posiciones</button>
         </div>
       </section>
     </div>
     </div>
+    </section>
+
+    <section id="modalTabla" class="modal none">
+      <div class="border bg-light relative">
+          <button id="cerrarTabla" class="btn-cerrar"></button>
+          <h2>Tabla de posiciones</h2>
+          
+      <div class="border bg-light">
+          <table id="tablaPosiciones">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Puntaje <span class="order" id="ordenarPuntaje"></span></th>
+              <th>Nivel</th>
+              <th>Fecha <span class="order" id="ordenarFecha"></span></th>
+              <th>Hora</th>
+            </tr>
+          </thead>
+          <tbody>
+           
+          </tbody>
+        </table>
+      </div>
     </section>
 
     <footer class="border bg-light">
@@ -104,5 +125,6 @@
   
   
   <script src="js/script.js"></script>
+  <script src="js/tabla.js"></script>
 </body>
 </html>
