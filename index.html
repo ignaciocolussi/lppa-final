@@ -1,53 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+  <meta charset= "UTF-8">
+  <meta http-equiv= "X-UA-Compatible" content= "IE=edge">
+  <meta name= "viewport" content="width=device-width, initial-scale=1.0">
   <title>SIMON Game</title>
+  <link rel="stylesheet"  type="text/css" href= "css/reset.css"/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oxanium">
-  <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <link rel="stylesheet" type="text/css" href="css/animaciones.css">
 </head>
 <body>
-  <main>
+  <header>
     <div class="border bg-light">
-      <div class="head flex-col">
-        <h1 id="titulo">SIMON</h1>
-      
-        <div id="info">Debes memorizar la secuencia y repetirla!</div>
-        <div id="infoTiempo" class="none">Tiempo restante: <span id="tiempo"></div>
-      </div>
-   
-
-     <div class="flex">      
-      <div class="border" id="simon">
-      <div id="controles">
-        <button id="inicio">Iniciar</button>
-        <button id="pausa">Pausa</button>
-        <button id="reinicio">Reiniciar</button>
-      </div>
-      <div id="containerBotones">
-        <button class="boton" id="boton1"></button>
-        <button class="boton" id="boton2"></button>
-      </div>
-      <div id="containerBotones">
-        <button class="boton" id="boton3"></button>
-        <button class="boton" id="boton4"></button>
-      </div>
+      <h1 id="titulo">SIMON</h1>
+      <div id="infoTiempo" class="none">Tiempo restante: <span id="tiempo"></span></div>
     </div>
+  </header>
+  <main>
+    <section id="inicioJuego" class="modal">
+      <div class="border bg-light">
+        <h2>¿Cómo jugar?</h2>
+        <p>El juego consiste en repetir la secuencia de colores que se muestra en la pantalla. <br> Cada vez que se acierta, se agrega un color más a la secuencia. Si se falla, el juego termina.</p>
+        <p>Pero antes.. Dime tu nombre para la tabla de posiciones</p>
+        <input type="text" id="nombreJugador" placeholder="Nombre">
+        <button id="iniciarJuego" class="btn-inicial" disabled>Jugar</button>
+      </div>
+    <section id="juego" class="none">
+      <div class="border bg-light">
+        
+      
+     
   
-      
-      
+       <div class="flex">      
+        <div class="border" id="simon">
+        <div id="controles">
+          <button id="inicio">Iniciar</button>
+          <button id="pausa">Pausa</button>
+          <button id="reinicio">Reiniciar</button>
+        </div>
+        <div id="containerBotones">
+          <button class="boton" id="boton1"></button>
+          <button class="boton" id="boton2"></button>
+        </div>
+        <div id="containerBotones">
+          <button class="boton" id="boton3"></button>
+          <button class="boton" id="boton4"></button>
+        </div>
+      </div>
     
-    <div class="border" id="puntajes">
-      <h2>Tabla de puntajes</h2>
-    
-      <div class="puntaje">
-        <h3 class="titulo">Puntaje actual</h3>
-        <p id="puntajeActual">Nivel: <span id="nivelValor">0</span> Puntaje: <span id="puntajeValor">0</span></p>
-        <h3 class="titulo">Puntaje máximo</h3>
-        <p id="puntajeMaximo">Nivel: <span id="nivelMaximoValor">0</span> Puntaje: <span id="puntajeMaximoValor">0</span></p>
+        
+        
+      
+      <div class="border" id="puntajes">
+        <h2>Tabla de puntajes</h2>
+      
+        <div class="puntaje">
+          <h3 class="titulo">Puntaje actual</h3>
+          <p id="puntajeActual">Nivel: <span id="nivelValor">0</span> Puntaje: <span id="puntajeValor">0</span></p>
+          <h3 class="titulo">Puntaje máximo</h3>
+          <p id="puntajeMaximo">Nivel: <span id="nivelMaximoValor">0</span> Puntaje: <span id="puntajeMaximoValor">0</span></p>
+        </div>
       </div>
     </div>
-  </div>
-  </div>
+    </div>
+    </section>
+  
   </main>
  
 
