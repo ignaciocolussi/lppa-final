@@ -141,6 +141,7 @@ function generarSiguienteBoton() {
 
 // Reiniciar el temporizador
 function reiniciarTemporizador() {
+  tiempoValor.style.color = '#ccc'
   tiempoRestante = 20;
   tiempoValor.textContent = tiempoRestante;
   pararTemporizador();
@@ -179,6 +180,7 @@ function terminarJuego() {
   puntaje = puntaje - penalizacion;
   guardarMayorPuntaje({puntaje: puntaje, nivel: nivel, fecha: Date.now()});
   juegoPausado = true;
+  modalEventos.classList.remove('none');
   modalEventos.classList.add('fade-in');
   modalEventos.classList.remove('fade-out');
   
@@ -192,6 +194,7 @@ function iniciarTemporizador() {
     if (tiempoRestante <= 10) {
       tiempoValor.style.color = 'red';
     }
+
 
     if (tiempoRestante === 0) {
       pararTemporizador();
@@ -224,6 +227,7 @@ function togglePausa() {
     botonPausa.textContent = 'Continuar';
 
     mensaje.textContent = 'Juego en pausa';
+    modalEventos.classList.remove('none');
     modalEventos.classList.remove('fade-out');
     modalEventos.classList.add('fade-in-flex');
     pararTemporizador();
