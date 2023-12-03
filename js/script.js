@@ -85,7 +85,6 @@ function handleButtonClick(event) {
     mensaje.textContent = 'Felicitaciones!. Siguiente nivel: ' + nivel;
     nivelValor.textContent = nivel;
     pararTemporizador();
-    guardarMayorPuntaje({puntaje: puntaje, nivel: nivel});
     generarSiguienteBoton();
     reiniciarTemporizador();
     setTimeout(MostrarSecuencia, 2000);
@@ -164,7 +163,7 @@ function iniciarJuego() {
   timer = null;
   infoTiempo.classList.remove('none');
   obtenerMayorPuntaje();
-  penalizacion()
+  calcularPenalizacion()
   generarSiguienteBoton();
   MostrarSecuencia();
 }
@@ -176,9 +175,9 @@ function terminarJuego() {
   botonInicio.disabled = false;
   botonPausa.disabled = true;
   pararTemporizador();
-  penalizacion();
+  calcularPenalizacion();
   puntaje = puntaje - penalizacion;
-  guardarMayorPuntaje({puntaje: puntaje, nivel: nivel});
+  guardarMayorPuntaje({puntaje: puntaje, nivel: nivel, fecha: Date.now()});
   juegoPausado = true;
   modalEventos.classList.add('fade-in');
   modalEventos.classList.remove('fade-out');
@@ -239,25 +238,39 @@ function reiniciarJuego() {
 
 // Guardar el mayor puntaje en el local storage
 function guardarMayorPuntaje(puntaje) {
-  var mayorPuntaje = localStorage.getItem('mayorPuntaje');
-  var res = JSON.parse(mayorPuntaje);
-  if(!localStorage.getItem('mayorPuntaje') || puntaje.puntaje > res.puntaje)  {
-    var jugador = localStorage.getItem('nombreJugador', nombreJugador)
+  var puntajes = localStorage.getItem('puntajes');
+  var resultados = JSON.parse(puntajes);
+  // Encontrar el mayor puntaje dentro del array resultados
+  var res = resultados.reduce(function(prev, current) {
+    return (prev.puntaje > current.puntaje) ? prev : current
+  });
+
+  if(!localStorage.getItem('puntajes') || puntaje.puntaje > res.puntaje)  {
+    var jugador = localStorage.getItem('nombreJugador')
     puntaje.jugador = jugador;
-    localStorage.setItem('mayorPuntaje', JSON.stringify(puntaje));
+    resultados.push(puntaje);
+    localStorage.setItem('puntajes', JSON.stringify(resultados));
     obtenerMayorPuntaje();
   }
 }
 
 // Obtener el mayor puntaje del local storage y mostrarlo 
 function obtenerMayorPuntaje() {
-  var mayorPuntaje = localStorage.getItem('mayorPuntaje');
-  if (!mayorPuntaje) {
+  var puntajes = localStorage.getItem('puntajes');
+  if (!puntajes) {
     nivelMaximoValor.textContent = 0;
     puntajeMaximoValor.textContent = 0;
-    localStorage.setItem('mayorPuntaje', JSON.stringify({puntaje: 0, nivel: 0}));
+
+    localStorage.setItem('puntajes', JSON.stringify([{puntaje: 0, nivel: 0, jugador: 'nadie', fecha: Date.now()}]));
+
+
+    
   }else{
-    var res = JSON.parse(mayorPuntaje);
+    var resultados = JSON.parse(puntajes);
+    var res = resultados.reduce(function(prev, current) {
+      return (prev.puntaje > current.puntaje) ? prev : current
+    });
+    console.debug(res);
     nivelMaximoValor.textContent = res.nivel;
     puntajeMaximoValor.textContent = res.puntaje;
   }
@@ -265,7 +278,7 @@ function obtenerMayorPuntaje() {
 
 }
 
-function penalizacion(){
+function calcularPenalizacion(){
   if (tiempoRestante <= 9){
     penalizacion = penalizacion + 10 - tiempoRestante;
   }
