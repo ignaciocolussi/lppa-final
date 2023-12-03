@@ -76,16 +76,27 @@ h5	{
     line-height: 1.5;
   }	
 
-  input {
+  input, textarea {
     font-family: 'Oxanium', serif;
     width: 100%;
     padding: .5rem;
     border-radius: 5px;
     border: 1px solid #ccc;
     margin-bottom: 1rem;
+    margin: 0 10px;
+    padding: 0 10px;
+    width: 10rem;
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+    background-color : #ccc;
+    color: #161616;
   }
 
-  input[type="text"] {
+
+  input[type="text"], input[type="email"], textarea {
   font-family: 'Oxanium', serif;
   font-size: large;
    border-radius: 5px;
@@ -93,10 +104,15 @@ h5	{
   }
 
   
+  input.invalid, textarea.invalid {
+    border: 3px solid red;
+  }
+  
 
   main {
     margin-top: 5rem;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
   }
@@ -203,19 +219,7 @@ h5	{
     color: #161616;
   }
 
-  input {
-    margin: 0 10px;
-    padding: 0 10px;
-    width: 10rem;
-    height: 50px;
-    border-radius: 10px;
-    border: none;
-    opacity: 0.7;
-    transition: opacity 0.3s;
-    background-color : #ccc;
-    color: #161616;
-
-  }
+  
   
   button:disabled {
     opacity: 0.3;
@@ -322,6 +326,63 @@ h5	{
         padding-top: .5rem;
     }
 
+
+    form{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    form input{
+      width: 100%;
+      max-width: 20rem;
+    }
+
+    form button{
+      width: 100%;
+      max-width: 20rem;
+    }
+
+    form textarea{
+      width: 100%;
+      max-width: 20rem;
+      height: 10rem;
+    }
+
+
+    footer {
+      background-color: #161616;
+      color: #ccc;
+      margin-top: 1rem;
+      padding: 2rem;
+    }
+
+    footer a {
+      color: #161616;
+      text-decoration: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      border-radius: 5px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    footer a:hover {
+      background-color: #888888;
+      color: #ccc;
+
+    }
+
+    footer  a > img{
+      width: 2rem;
+      height: 2rem;
+      margin: 0 1rem;
+    }
+
+   
     @media screen and (max-width: 600px) {
       main {
         margin-top: 0;
