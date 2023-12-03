@@ -25,7 +25,6 @@ var nivelValor = document.getElementById('nivelValor');
 var botonInicio = document.getElementById('inicio');
 var botonPausa = document.getElementById('pausa');
 var botonReanudarModal = document.getElementById('reanudar');
-var botonReinicio = document.getElementById('reinicio');
 var modalEventos = document.getElementById('eventos');
 var mensaje = document.getElementById('info');
 var tiempoValor = document.getElementById('tiempo');
@@ -44,7 +43,6 @@ for (var i = 0; i < botones.length; i++) {
 
 botonInicio.addEventListener('click', iniciarJuego);
 botonPausa.addEventListener('click', togglePausa);
-botonReinicio.addEventListener('click', reiniciarJuego);
 botonReanudarModal.addEventListener('click', togglePausa);
 
 // Handler para el input del nombre del jugador
@@ -59,7 +57,6 @@ function handleModalClick() {
   localStorage.setItem('nombreJugador', nombreJugador);  
   botonInicio.disabled = false;
   botonPausa.disabled = true;
-  botonReinicio.disabled = true;
   modal.classList.add('fade-out');
   
 }
@@ -165,7 +162,6 @@ function iniciarJuego() {
   nivelValor.textContent = nivel;
   botonInicio.disabled = true;
   botonPausa.disabled = false;
-  botonReinicio.disabled = false;
   timer = null;
   infoTiempo.classList.remove('none');
   obtenerMayorPuntaje();
@@ -180,7 +176,6 @@ function terminarJuego() {
   mensaje.innerHTML = `Fin del juego! <br> Tu puntaje: ${puntaje}`;
   botonInicio.disabled = false;
   botonPausa.disabled = true;
-  botonReinicio.disabled = false;
   pararTemporizador();
   guardarMayorPuntaje({puntaje: puntaje, nivel: nivel});
   juegoPausado = true;
