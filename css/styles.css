@@ -258,24 +258,24 @@ h5	{
 
     #boton1:focus {
         background-color: #ff0000;
-        box-shadow: 0px 0px 10px 10px #ff0000;
+        opacity: 1;
     }
 
 
     #boton2:focus {
         background-color: #00ff00;
-        box-shadow: 0px 0px 10px 10px #00ff00;
+        opacity: 1;
     }
   
 
     #boton3:focus {
         background-color: #0000ff;
-        box-shadow: 0px 0px 10px 10px #0000ff;
+        opacity: 1;
     }
 
     #boton4:focus {
         background-color: #ffff00;
-        box-shadow: 0px 0px 10px 10px #ffff00;
+       opacity: 1;
     }
 
 
