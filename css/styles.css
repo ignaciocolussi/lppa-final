@@ -187,7 +187,8 @@ h5	{
   #containerBotones {
     display: flex;
     justify-content: space-evenly;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
   }
   
   .boton {
@@ -283,10 +284,8 @@ h5	{
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 5vw;
-      height: 5vw;
-      max-width: 10vh;
-      max-height: 10vh;
+      width: 15rem;
+      height: 15rem;
       border-radius: 50%;
       background-color: #161616;
     }
@@ -359,6 +358,7 @@ h5	{
       padding: 2rem;
       display: flex;
       flex-direction: row;
+      margin-bottom: 2rem;
     }
 
     footer a {
