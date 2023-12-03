@@ -101,7 +101,7 @@ function feedbackBoton(boton) {
   boton.style.opacity = 1;
   setTimeout(function() {
     boton.style.opacity = 0.3;
-  }, 1000);
+  }, 800);
 }
 
 // Funcion para checkear que la sucuencia que introdujo el jugador es correcta
@@ -118,7 +118,6 @@ function checkearSecuencia() {
 function MostrarSecuencia() {
 
   mostrandoSecuencia = true;
-  mensaje.textContent = 'Debes memorizar la secuencia y repetirla.';
 
   var indice = 0;
   // recorro todos los botones para sacar la propiedad focus de cada uno 
@@ -136,7 +135,7 @@ function MostrarSecuencia() {
       mensaje.textContent = 'Repite la secuencia!';
       iniciarTemporizador();
     }
-  }, 1000);
+  }, 1500);
 }
 
 // Generar el siguiente boton de la secuencia
@@ -178,13 +177,16 @@ function iniciarJuego() {
 // Funcion para finalizar el juego
 function terminarJuego() {
   juegoFinalizado = true;
-  mensaje.textContent = 'Fin del juego! Tu puntaje: ' + puntaje;
+  mensaje.innerHTML = `Fin del juego! <br> Tu puntaje: ${puntaje}`;
   botonInicio.disabled = false;
   botonPausa.disabled = true;
   botonReinicio.disabled = false;
   pararTemporizador();
   guardarMayorPuntaje({puntaje: puntaje, nivel: nivel});
   juegoPausado = true;
+  modalEventos.classList.add('fade-in');
+  modalEventos.classList.remove('fade-out');
+  
 }
 
 // Funciones del temporizador
@@ -206,24 +208,33 @@ function pararTemporizador() {
 
 // Pausa el juego
 function togglePausa() {
+  if (juegoFinalizado){
+    modalEventos.classList.remove('fade-in-flex');
+    modalEventos.classList.add('fade-out');
+    reiniciarJuego();
+    return;
+  }
+
   if (juegoPausado) {
     juegoPausado = false;
-    modalEventos.classList.remove('fade-in');
+    modalEventos.classList.remove('fade-in-flex');
     modalEventos.classList.add('fade-out');
     botonPausa.textContent = 'Pausa';
     iniciarTemporizador();
   } else {
     juegoPausado = true;
     botonPausa.textContent = 'Continuar';
+
     mensaje.textContent = 'Juego en pausa';
     modalEventos.classList.remove('fade-out');
-    modalEventos.classList.add('fade-in');
+    modalEventos.classList.add('fade-in-flex');
     pararTemporizador();
   }
 }
 
 // Reiniciar el juego
 function reiniciarJuego() {
+
   juegoFinalizado = false;
   juegoPausado = false;
   reiniciarTemporizador();
