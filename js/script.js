@@ -60,14 +60,17 @@ function handleModalClick() {
 
 // Handler para los clicks de los botones
 function handleButtonClick(event) {
+  var boton;
+  var indiceBoton;
+  var esCorrecto;
   if (mostrandoSecuencia || juegoPausado || juegoFinalizado || !timer) return;
 
-  var boton = event.target;
-  var indiceBoton = Array.from(botones).indexOf(boton) + 1;
+  boton = event.target;
+  indiceBoton = Array.from(botones).indexOf(boton) + 1;
   feedbackBoton(boton);
 
   secuenciaJugador.push(indiceBoton);
-  var esCorrecto = checkearSecuencia();
+  esCorrecto = checkearSecuencia();
 
   if (!esCorrecto) {
     terminarJuego();
@@ -109,14 +112,15 @@ function checkearSecuencia() {
 
 // Mostrar la sucuencia generada al jugador para que la repita
 function MostrarSecuencia() {
-  mostrandoSecuencia = true;
-
   var indice = 0;
+  var intervalo;
+  mostrandoSecuencia = true;
+ 
   // recorro todos los botones para sacar la propiedad focus de cada uno
   for (const boton of botones) {
     boton.blur();
   }
-  var intervalo = setInterval(function () {
+   intervalo = setInterval(function () {
     var indiceBoton = secuencia[indice];
     feedbackBoton(botones[indiceBoton - 1]);
 
@@ -258,6 +262,8 @@ function guardarMayorPuntaje(puntaje) {
 // Obtener el mayor puntaje del local storage y mostrarlo
 function obtenerMayorPuntaje() {
   var puntajes = localStorage.getItem("puntajes");
+  var resultados;
+  var res;
   if (!puntajes) {
     nivelMaximoValor.textContent = 0;
     puntajeMaximoValor.textContent = 0;
@@ -269,8 +275,8 @@ function obtenerMayorPuntaje() {
       ])
     );
   } else {
-    var resultados = JSON.parse(puntajes);
-    var res = resultados.reduce(function (prev, current) {
+    resultados = JSON.parse(puntajes);
+    res = resultados.reduce(function (prev, current) {
       return prev.puntaje > current.puntaje ? prev : current;
     });
     console.debug(res);
