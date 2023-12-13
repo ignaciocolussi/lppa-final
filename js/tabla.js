@@ -1,3 +1,5 @@
+'use-strict'
+
 // Obtengo el boton de abrir la tabla
 let botonTabla = document.getElementById("verTabla");
 var modalTabla = document.getElementById("modalTabla");

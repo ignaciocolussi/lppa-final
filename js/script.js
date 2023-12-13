@@ -1,5 +1,5 @@
-'use strict';
-console.debug('Juego Simon Dice');
+"use-strict";
+console.debug("Juego Simon Dice");
 
 // Establezo las variables del juego
 var secuencia = [];
@@ -14,35 +14,34 @@ var penalizacion = 0;
 var tiempoRestante = 20;
 
 // Capturo elementos del DOM para manipular mas tarde
-var modal = document.getElementsByClassName('modal')[0];
-var botonModal = document.getElementsByClassName('btn-inicial')[0];
-var inputInfoJugador = document.getElementById('nombreJugador');
-var seccionJuego = document.getElementById('juego');
-var botones = document.getElementsByClassName('boton');
-var puntajeValor = document.getElementById('puntajeValor');
-var nivelValor = document.getElementById('nivelValor');
-var botonInicio = document.getElementById('inicio');
-var botonPausa = document.getElementById('pausa');
-var botonReanudarModal = document.getElementById('reanudar');
-var modalEventos = document.getElementById('eventos');
-var mensaje = document.getElementById('info');
-var tiempoValor = document.getElementById('tiempo');
-var nivelMaximoValor = document.getElementById('nivelMaximoValor');
-var puntajeMaximoValor = document.getElementById('puntajeMaximoValor');
-var infoTiempo = document.getElementById('infoTiempo');
+var modal = document.getElementsByClassName("modal")[0];
+var botonModal = document.getElementsByClassName("btn-inicial")[0];
+var inputInfoJugador = document.getElementById("nombreJugador");
+var seccionJuego = document.getElementById("juego");
+var botones = document.getElementsByClassName("boton");
+var puntajeValor = document.getElementById("puntajeValor");
+var nivelValor = document.getElementById("nivelValor");
+var botonInicio = document.getElementById("inicio");
+var botonPausa = document.getElementById("pausa");
+var botonReanudarModal = document.getElementById("reanudar");
+var modalEventos = document.getElementById("eventos");
+var mensaje = document.getElementById("info");
+var tiempoValor = document.getElementById("tiempo");
+var nivelMaximoValor = document.getElementById("nivelMaximoValor");
+var puntajeMaximoValor = document.getElementById("puntajeMaximoValor");
+var infoTiempo = document.getElementById("infoTiempo");
 
-// Agrego los eventos 
-inputInfoJugador.addEventListener('keyup', handleInputJugador);
-botonModal.addEventListener('click', handleModalClick);
-
+// Agrego los eventos
+inputInfoJugador.addEventListener("keyup", handleInputJugador);
+botonModal.addEventListener("click", handleModalClick);
 
 for (var i = 0; i < botones.length; i++) {
-  botones[i].addEventListener('click', handleButtonClick);
+  botones[i].addEventListener("click", handleButtonClick);
 }
 
-botonInicio.addEventListener('click', iniciarJuego);
-botonPausa.addEventListener('click', togglePausa);
-botonReanudarModal.addEventListener('click', togglePausa);
+botonInicio.addEventListener("click", iniciarJuego);
+botonPausa.addEventListener("click", togglePausa);
+botonReanudarModal.addEventListener("click", togglePausa);
 
 // Handler para el input del nombre del jugador
 function handleInputJugador(event) {
@@ -53,11 +52,10 @@ function handleInputJugador(event) {
 // Handler para el click del boton del modal
 function handleModalClick() {
   var nombreJugador = inputInfoJugador.value;
-  localStorage.setItem('nombreJugador', nombreJugador);  
+  localStorage.setItem("nombreJugador", nombreJugador);
   botonInicio.disabled = false;
   botonPausa.disabled = true;
-  modal.classList.add('fade-out');
-  
+  modal.classList.add("fade-out");
 }
 
 // Handler para los clicks de los botones
@@ -82,7 +80,7 @@ function handleButtonClick(event) {
   if (secuenciaJugador.length === secuencia.length) {
     nivel++;
     secuenciaJugador = [];
-    mensaje.textContent = 'Felicitaciones!. Siguiente nivel: ' + nivel;
+    mensaje.textContent = "Felicitaciones!. Siguiente nivel: " + nivel;
     nivelValor.textContent = nivel;
     pararTemporizador();
     generarSiguienteBoton();
@@ -94,7 +92,7 @@ function handleButtonClick(event) {
 // Mostrar feedback cuando se hace click en un boton
 function feedbackBoton(boton) {
   boton.style.opacity = 1;
-  setTimeout(function() {
+  setTimeout(function () {
     boton.style.opacity = 0.3;
   }, 800);
 }
@@ -111,15 +109,14 @@ function checkearSecuencia() {
 
 // Mostrar la sucuencia generada al jugador para que la repita
 function MostrarSecuencia() {
-
   mostrandoSecuencia = true;
 
   var indice = 0;
-  // recorro todos los botones para sacar la propiedad focus de cada uno 
+  // recorro todos los botones para sacar la propiedad focus de cada uno
   for (const boton of botones) {
     boton.blur();
   }
-  var intervalo = setInterval(function() {
+  var intervalo = setInterval(function () {
     var indiceBoton = secuencia[indice];
     feedbackBoton(botones[indiceBoton - 1]);
 
@@ -127,7 +124,7 @@ function MostrarSecuencia() {
     if (indice >= secuencia.length) {
       clearInterval(intervalo);
       mostrandoSecuencia = false;
-      mensaje.textContent = 'Repite la secuencia!';
+      mensaje.textContent = "Repite la secuencia!";
       iniciarTemporizador();
     }
   }, 1500);
@@ -141,7 +138,7 @@ function generarSiguienteBoton() {
 
 // Reiniciar el temporizador
 function reiniciarTemporizador() {
-  tiempoValor.style.color = '#ccc'
+  tiempoValor.style.color = "#ccc";
   tiempoRestante = 20;
   tiempoValor.textContent = tiempoRestante;
   pararTemporizador();
@@ -162,9 +159,9 @@ function iniciarJuego() {
   botonInicio.disabled = true;
   botonPausa.disabled = false;
   timer = null;
-  infoTiempo.classList.remove('none');
+  infoTiempo.classList.remove("none");
   obtenerMayorPuntaje();
-  calcularPenalizacion()
+  calcularPenalizacion();
   generarSiguienteBoton();
   MostrarSecuencia();
 }
@@ -178,23 +175,21 @@ function terminarJuego() {
   pararTemporizador();
   calcularPenalizacion();
   puntaje = puntaje - penalizacion;
-  guardarMayorPuntaje({puntaje: puntaje, nivel: nivel, fecha: Date.now()});
+  guardarMayorPuntaje({ puntaje: puntaje, nivel: nivel, fecha: Date.now() });
   juegoPausado = true;
-  modalEventos.classList.remove('none');
-  modalEventos.classList.add('fade-in');
-  modalEventos.classList.remove('fade-out');
-  
+  modalEventos.classList.remove("none");
+  modalEventos.classList.add("fade-in");
+  modalEventos.classList.remove("fade-out");
 }
 
 // Funciones del temporizador
 function iniciarTemporizador() {
- timer = setInterval(function() {
+  timer = setInterval(function () {
     tiempoRestante--;
     tiempoValor.textContent = tiempoRestante;
     if (tiempoRestante <= 10) {
-      tiempoValor.style.color = 'red';
+      tiempoValor.style.color = "red";
     }
-
 
     if (tiempoRestante === 0) {
       pararTemporizador();
@@ -209,34 +204,33 @@ function pararTemporizador() {
 
 // Pausa el juego
 function togglePausa() {
-  if (juegoFinalizado){
-    modalEventos.classList.remove('fade-in-flex');
-    modalEventos.classList.add('fade-out');
+  if (juegoFinalizado) {
+    modalEventos.classList.remove("fade-in-flex");
+    modalEventos.classList.add("fade-out");
     reiniciarJuego();
     return;
   }
 
   if (juegoPausado) {
     juegoPausado = false;
-    modalEventos.classList.remove('fade-in-flex');
-    modalEventos.classList.add('fade-out');
-    botonPausa.textContent = 'Pausa';
+    modalEventos.classList.remove("fade-in-flex");
+    modalEventos.classList.add("fade-out");
+    botonPausa.textContent = "Pausa";
     iniciarTemporizador();
   } else {
     juegoPausado = true;
-    botonPausa.textContent = 'Continuar';
+    botonPausa.textContent = "Continuar";
 
-    mensaje.textContent = 'Juego en pausa';
-    modalEventos.classList.remove('none');
-    modalEventos.classList.remove('fade-out');
-    modalEventos.classList.add('fade-in-flex');
+    mensaje.textContent = "Juego en pausa";
+    modalEventos.classList.remove("none");
+    modalEventos.classList.remove("fade-out");
+    modalEventos.classList.add("fade-in-flex");
     pararTemporizador();
   }
 }
 
 // Reiniciar el juego
 function reiniciarJuego() {
-
   juegoFinalizado = false;
   juegoPausado = false;
   reiniciarTemporizador();
@@ -245,48 +239,48 @@ function reiniciarJuego() {
 
 // Guardar el mayor puntaje en el local storage
 function guardarMayorPuntaje(puntaje) {
-  var puntajes = localStorage.getItem('puntajes');
+  var puntajes = localStorage.getItem("puntajes");
   var resultados = JSON.parse(puntajes);
   // Encontrar el mayor puntaje dentro del array resultados
-  var res = resultados.reduce(function(prev, current) {
-    return (prev.puntaje > current.puntaje) ? prev : current
+  var res = resultados.reduce(function (prev, current) {
+    return prev.puntaje > current.puntaje ? prev : current;
   });
 
-  if(!localStorage.getItem('puntajes') || puntaje.puntaje > res.puntaje)  {
-    var jugador = localStorage.getItem('nombreJugador')
+  if (!localStorage.getItem("puntajes") || puntaje.puntaje > res.puntaje) {
+    var jugador = localStorage.getItem("nombreJugador");
     puntaje.jugador = jugador;
     resultados.push(puntaje);
-    localStorage.setItem('puntajes', JSON.stringify(resultados));
+    localStorage.setItem("puntajes", JSON.stringify(resultados));
     obtenerMayorPuntaje();
   }
 }
 
-// Obtener el mayor puntaje del local storage y mostrarlo 
+// Obtener el mayor puntaje del local storage y mostrarlo
 function obtenerMayorPuntaje() {
-  var puntajes = localStorage.getItem('puntajes');
+  var puntajes = localStorage.getItem("puntajes");
   if (!puntajes) {
     nivelMaximoValor.textContent = 0;
     puntajeMaximoValor.textContent = 0;
 
-    localStorage.setItem('puntajes', JSON.stringify([{puntaje: 0, nivel: 0, jugador: 'nadie', fecha: Date.now()}]));
-
-
-    
-  }else{
+    localStorage.setItem(
+      "puntajes",
+      JSON.stringify([
+        { puntaje: 0, nivel: 0, jugador: "nadie", fecha: Date.now() },
+      ])
+    );
+  } else {
     var resultados = JSON.parse(puntajes);
-    var res = resultados.reduce(function(prev, current) {
-      return (prev.puntaje > current.puntaje) ? prev : current
+    var res = resultados.reduce(function (prev, current) {
+      return prev.puntaje > current.puntaje ? prev : current;
     });
     console.debug(res);
     nivelMaximoValor.textContent = res.nivel;
     puntajeMaximoValor.textContent = res.puntaje;
   }
-
-
 }
 
-function calcularPenalizacion(){
-  if (tiempoRestante <= 9){
+function calcularPenalizacion() {
+  if (tiempoRestante <= 9) {
     penalizacion = penalizacion + 10 - tiempoRestante;
   }
 }

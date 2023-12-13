@@ -1,3 +1,4 @@
+'use-strict'
 var form = document.getElementById("contacto");
 var botonEnviar = document.getElementById("enviar");
 var nombre = document.getElementById("nombre");
