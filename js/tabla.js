@@ -1,4 +1,4 @@
-'use-strict'
+"use-strict"
 
 // Obtengo el boton de abrir la tabla
 var botonTabla = document.getElementById("verTabla");
@@ -55,25 +55,25 @@ function ordenarFechaYRellenar() {
 function rellenarTabla() {
     tablaPuntajes.innerHTML = "";
     tabla.forEach(function(puntaje) {
-      var row = document.createElement('tr');
+      var row = document.createElement("tr");
   
-      var tdJugador = document.createElement('td');
+      var tdJugador = document.createElement("td");
       tdJugador.textContent = puntaje.jugador;
       row.appendChild(tdJugador);
   
-      var tdPuntaje = document.createElement('td');
+      var tdPuntaje = document.createElement("td");
       tdPuntaje.textContent = puntaje.puntaje;
       row.appendChild(tdPuntaje);
   
-      var tdNivel = document.createElement('td');
+      var tdNivel = document.createElement("td");
       tdNivel.textContent = puntaje.nivel;
       row.appendChild(tdNivel);
   
-      var tdFecha = document.createElement('td');
+      var tdFecha = document.createElement("td");
       tdFecha.textContent = new Date(puntaje.fecha).toLocaleDateString();
       row.appendChild(tdFecha);
   
-      var tdHora = document.createElement('td');
+      var tdHora = document.createElement("td");
       tdHora.textContent = new Date(puntaje.fecha).toLocaleTimeString();
       row.appendChild(tdHora);
   

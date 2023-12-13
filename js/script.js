@@ -169,7 +169,7 @@ function iniciarJuego() {
 // Funcion para finalizar el juego
 function terminarJuego() {
   juegoFinalizado = true;
-  mensaje.innerHTML = `Fin del juego! <br> Tu puntaje: ${puntaje}`;
+  mensaje.innerHTML = "Fin del juego! <p> Tu puntaje: " + puntaje;
   botonInicio.disabled = false;
   botonPausa.disabled = true;
   pararTemporizador();

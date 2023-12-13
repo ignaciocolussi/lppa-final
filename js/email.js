@@ -52,7 +52,7 @@ function enviarEmail() {
         return;
     }
     var mensajeFinal = "Nombre: " + nombre.value + "%0D%0A" + "Email: " + email.value + "%0D%0A" + "Mensaje: " + mensaje.value;
-    window.location.href = 'mailto:ignaciocolussi@outlook.com' + '?subject=Contacto desde el sitio web&body=' + mensajeFinal;
+    window.location.href = "mailto:ignaciocolussi@outlook.com" + "?subject=Contacto desde el sitio web&body=" + mensajeFinal;
     form.reset();
 }
 
