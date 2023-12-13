@@ -370,7 +370,8 @@ footer .row {
   margin: 1rem;
 }
 
-@media screen and (max-width: 37.5rem) {
+
+@media screen and (max-width: 600px) {
   main {
       margin-top: 0;
   }
