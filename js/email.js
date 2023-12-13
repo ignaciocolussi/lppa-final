@@ -15,17 +15,17 @@ botonEnviar.addEventListener("click", function(event) {
 );
 
 function validarFormulario() {
-    if(nombre.value == ""){
+    if(nombre.value === ""){
         errorNombre.innerHTML = "Debe ingresar un nombre";
         errorNombre.style.color = "red";
         nombre.classList.add("invalid");
         return false;
-    }else if(email.value == "" || email.value.indexOf("@") == -1){
+    }else if(email.value === "" || email.value.indexOf("@") === -1){
         errorEmail.innerHTML = "Debe ingresar un email";
         errorEmail.style.color = "red";
         email.classList.add("invalid");
         return false;
-    }else if(mensaje.value == ""){
+    }else if(mensaje.value === ""){
         errorMensaje.innerHTML = "Debe ingresar un mensaje";
         errorMensaje.style.color = "red";
         mensaje.classList.add("invalid");
