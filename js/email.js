@@ -1,11 +1,8 @@
-// get the form elements defined in your form HTML  and open the default email client when the button is clicked filling the email, name and message fields in the email client.
 var form = document.getElementById("contacto");
 var botonEnviar = document.getElementById("enviar");
-
 var nombre = document.getElementById("nombre");
 var email = document.getElementById("email");
 var mensaje = document.getElementById("mensaje");
-
 var errorNombre = document.getElementById("errorNombre");
 var errorEmail = document.getElementById("errorEmail");
 var errorMensaje = document.getElementById("errorMensaje");
