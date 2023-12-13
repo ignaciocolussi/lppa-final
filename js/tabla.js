@@ -1,7 +1,7 @@
 'use-strict'
 
 // Obtengo el boton de abrir la tabla
-let botonTabla = document.getElementById("verTabla");
+var botonTabla = document.getElementById("verTabla");
 var modalTabla = document.getElementById("modalTabla");
 var botonCerrarTabla = document.getElementById("cerrarTabla");
 var botonOrdenarPuntaje = document.getElementById("ordenarPuntaje");
@@ -35,7 +35,9 @@ function iniciar() {
 }
 
 function ordenarPuntajeYRellenar() {
-    tabla.sort((a, b) => b.puntaje - a.puntaje);
+    tabla.sort(function(a, b) {
+      return b.puntaje - a.puntaje;
+  });
     // relleno la tabla
     rellenarTabla();
 
@@ -43,22 +45,39 @@ function ordenarPuntajeYRellenar() {
 
 function ordenarFechaYRellenar() {
    
-    tabla.sort((a, b) => b.fecha - a.fecha);
+    tabla.sort(function(a, b) {
+      return b.fecha - a.fecha;
+  });
     console.debug(tabla);
     rellenarTabla();
 }
 
 function rellenarTabla() {
     tablaPuntajes.innerHTML = "";
-    tabla.forEach((puntaje) => {
-        tablaPuntajes.innerHTML += `
-        <tr>
-          <td>${puntaje.jugador}</td>
-          <td>${puntaje.puntaje}</td>
-          <td>${puntaje.nivel}</td>
-          <td>${new Date(puntaje.fecha).toLocaleDateString()}</td>
-          <td>${new Date(puntaje.fecha).toLocaleTimeString()}</td>
-        </tr>
-      `;
-    });
+    tabla.forEach(function(puntaje) {
+      var row = document.createElement('tr');
+  
+      var tdJugador = document.createElement('td');
+      tdJugador.textContent = puntaje.jugador;
+      row.appendChild(tdJugador);
+  
+      var tdPuntaje = document.createElement('td');
+      tdPuntaje.textContent = puntaje.puntaje;
+      row.appendChild(tdPuntaje);
+  
+      var tdNivel = document.createElement('td');
+      tdNivel.textContent = puntaje.nivel;
+      row.appendChild(tdNivel);
+  
+      var tdFecha = document.createElement('td');
+      tdFecha.textContent = new Date(puntaje.fecha).toLocaleDateString();
+      row.appendChild(tdFecha);
+  
+      var tdHora = document.createElement('td');
+      tdHora.textContent = new Date(puntaje.fecha).toLocaleTimeString();
+      row.appendChild(tdHora);
+  
+      tablaPuntajes.appendChild(row);
+  });
+  
 }
