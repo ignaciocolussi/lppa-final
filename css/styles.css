@@ -213,29 +213,40 @@ h6 {
     cursor: pointer;
   }
 
-  #boton1 {
-    background-color: #ff0000;
+  #boton1,
+  #boton2,
+  #boton3,
+  #boton4 {
     border-radius: 5px;
-    border-top-left-radius: 100%;
   }
 
-    #boton2 {
-        background-color: #00ff00;
-        border-radius: 5px;
-        border-top-right-radius: 100%;
-    }
+  #boton1 {
+    background-color: #ff0000;
+    border-top-left-radius: 100%;
+}
 
-    #boton3 {
-        background-color: #0000ff;
-        border-radius: 5px;
-        border-bottom-left-radius: 100%;
-    }
+#boton2 {
+    background-color: #00ff00;
+    border-top-right-radius: 100%;
+}
 
-    #boton4 {
-        background-color: #ffff00;
-        border-radius: 5px;
-        border-bottom-right-radius: 100%;
-    }
+#boton3 {
+    background-color: #0000ff;
+    border-bottom-left-radius: 100%;
+}
+
+#boton4 {
+    background-color: #ffff00;
+    border-bottom-right-radius: 100%;
+}
+
+    
+#boton1:focus,
+#boton2:focus,
+#boton3:focus,
+#boton4:focus {
+    opacity: 1;
+}
 
     #boton1:focus {
         background-color: #ff0000;
