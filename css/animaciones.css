@@ -1,8 +1,8 @@
 @keyframes titulo {
-    0%   {color: rgb(236, 0, 0);}
-    25%  {color: yellow;}
-    50%  {color: blue;}
-    100% {color: green;}
+    0%   {color: #ec0000;}
+    25%  {color: #ffff00;}
+    50%  {color: #0000ff;}
+    100% {color: #008000;}
   }
 
   

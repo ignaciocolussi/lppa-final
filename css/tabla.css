@@ -10,7 +10,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 tr:hover {background-color: #dddddd5d;}
 th {
   background-color: #4CAF50;
-  color: white;
+  color: #ffffff;
 }
 
 .relative {
@@ -24,7 +24,7 @@ th {
     height: 2rem;
     border: 1px solid #010201;
     background:  url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
-    background-color: rgb(204, 204, 204); 
+    background-color: #cccccc; 
     opacity: 1;
     border-radius: 100%;
     font-size: 8pt;
@@ -40,7 +40,7 @@ th {
 }
 .btn-cerrar:hover,
 .btn-cerrar:focus {
-  color: black;
+  color: #000000;
   text-decoration: none;
   cursor: pointer;
 
