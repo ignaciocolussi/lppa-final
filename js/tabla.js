@@ -1,4 +1,4 @@
-"use-strict"
+"use-strict";
 
 // Obtengo el boton de abrir la tabla
 var botonTabla = document.getElementById("verTabla");
@@ -6,7 +6,9 @@ var modalTabla = document.getElementById("modalTabla");
 var botonCerrarTabla = document.getElementById("cerrarTabla");
 var botonOrdenarPuntaje = document.getElementById("ordenarPuntaje");
 var botonOrdenarFecha = document.getElementById("ordenarFecha");
-var tablaPuntajes = document.getElementById("tablaPosiciones").getElementsByTagName("tbody")[0];
+var tablaPuntajes = document
+  .getElementById("tablaPosiciones")
+  .getElementsByTagName("tbody")[0];
 var tabla = [];
 //Suscribo a los eventos
 botonTabla.addEventListener("click", abrirTabla);
@@ -16,7 +18,7 @@ botonOrdenarFecha.addEventListener("click", ordenarFechaYRellenar);
 
 function rellenarTabla() {
   tablaPuntajes.innerHTML = "";
-  tabla.forEach(function(puntaje) {
+  tabla.forEach(function (puntaje) {
     var row = document.createElement("tr");
 
     var tdJugador = document.createElement("td");
@@ -40,49 +42,43 @@ function rellenarTabla() {
     row.appendChild(tdHora);
 
     tablaPuntajes.appendChild(row);
-  }
-  );
-
+  });
 }
 
 function ordenarPuntajeYRellenar() {
-  tabla.sort(function(a, b) {
+  tabla.sort(function (a, b) {
     return b.puntaje - a.puntaje;
-});
+  });
   // relleno la tabla
   rellenarTabla();
-
 }
 
 function iniciar() {
-  tabla = JSON.parse(localStorage.getItem("puntajes"));
-  ordenarPuntajeYRellenar();
+  try {
+    tabla = JSON.parse(localStorage.getItem("puntajes"));
+    ordenarPuntajeYRellenar();
+  } catch (error) {
+    tabla = [];
+  }
 }
-
-
-
-
 
 function abrirTabla() {
-    modalTabla.classList.remove("none")
-    modalTabla.classList.add("fade-in-flex");
+  iniciar();
+  modalTabla.classList.remove("none");
+  modalTabla.classList.add("fade-in-flex");
 }
-
 
 function cerrarTabla() {
   modalTabla.classList.remove("fade-in-flex");
   modalTabla.classList.add("fade-out");
-
 }
 
 function ordenarFechaYRellenar() {
-   
-    tabla.sort(function(a, b) {
-      return b.fecha - a.fecha;
+  tabla.sort(function (a, b) {
+    return b.fecha - a.fecha;
   });
-    console.debug(tabla);
-    rellenarTabla();
+  console.debug(tabla);
+  rellenarTabla();
 }
 
 document.onload = iniciar();
-
