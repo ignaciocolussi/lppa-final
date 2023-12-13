@@ -14,32 +14,64 @@ botonCerrarTabla.addEventListener("click", cerrarTabla);
 botonOrdenarPuntaje.addEventListener("click", ordenarPuntajeYRellenar);
 botonOrdenarFecha.addEventListener("click", ordenarFechaYRellenar);
 
-document.onload = iniciar();
+function rellenarTabla() {
+  tablaPuntajes.innerHTML = "";
+  tabla.forEach(function(puntaje) {
+    var row = document.createElement("tr");
 
-// Funcion para abrir la tabla
+    var tdJugador = document.createElement("td");
+    tdJugador.textContent = puntaje.jugador;
+    row.appendChild(tdJugador);
+
+    var tdPuntaje = document.createElement("td");
+    tdPuntaje.textContent = puntaje.puntaje;
+    row.appendChild(tdPuntaje);
+
+    var tdNivel = document.createElement("td");
+    tdNivel.textContent = puntaje.nivel;
+    row.appendChild(tdNivel);
+
+    var tdFecha = document.createElement("td");
+    tdFecha.textContent = new Date(puntaje.fecha).toLocaleDateString();
+    row.appendChild(tdFecha);
+
+    var tdHora = document.createElement("td");
+    tdHora.textContent = new Date(puntaje.fecha).toLocaleTimeString();
+    row.appendChild(tdHora);
+
+    tablaPuntajes.appendChild(row);
+  }
+  );
+
+}
+
+function ordenarPuntajeYRellenar() {
+  tabla.sort(function(a, b) {
+    return b.puntaje - a.puntaje;
+});
+  // relleno la tabla
+  rellenarTabla();
+
+}
+
+function iniciar() {
+  tabla = JSON.parse(localStorage.getItem("puntajes"));
+  ordenarPuntajeYRellenar();
+}
+
+
+
+
+
 function abrirTabla() {
     modalTabla.classList.remove("none")
     modalTabla.classList.add("fade-in-flex");
 }
 
-// Funcion para cerrar la tablaº
+
 function cerrarTabla() {
   modalTabla.classList.remove("fade-in-flex");
   modalTabla.classList.add("fade-out");
-
-}
-
-function iniciar() {
-    tabla = JSON.parse(localStorage.getItem("puntajes"));
-    ordenarPuntajeYRellenar();
-}
-
-function ordenarPuntajeYRellenar() {
-    tabla.sort(function(a, b) {
-      return b.puntaje - a.puntaje;
-  });
-    // relleno la tabla
-    rellenarTabla();
 
 }
 
@@ -52,32 +84,5 @@ function ordenarFechaYRellenar() {
     rellenarTabla();
 }
 
-function rellenarTabla() {
-    tablaPuntajes.innerHTML = "";
-    tabla.forEach(function(puntaje) {
-      var row = document.createElement("tr");
-  
-      var tdJugador = document.createElement("td");
-      tdJugador.textContent = puntaje.jugador;
-      row.appendChild(tdJugador);
-  
-      var tdPuntaje = document.createElement("td");
-      tdPuntaje.textContent = puntaje.puntaje;
-      row.appendChild(tdPuntaje);
-  
-      var tdNivel = document.createElement("td");
-      tdNivel.textContent = puntaje.nivel;
-      row.appendChild(tdNivel);
-  
-      var tdFecha = document.createElement("td");
-      tdFecha.textContent = new Date(puntaje.fecha).toLocaleDateString();
-      row.appendChild(tdFecha);
-  
-      var tdHora = document.createElement("td");
-      tdHora.textContent = new Date(puntaje.fecha).toLocaleTimeString();
-      row.appendChild(tdHora);
-  
-      tablaPuntajes.appendChild(row);
-  });
-  
-}
+document.onload = iniciar();
+

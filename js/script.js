@@ -32,25 +32,23 @@ var puntajeMaximoValor = document.getElementById("puntajeMaximoValor");
 var infoTiempo = document.getElementById("infoTiempo");
 
 // Agrego los eventos
-inputInfoJugador.addEventListener("keyup", handleInputJugador);
-botonModal.addEventListener("click", handleModalClick);
+inputInfoJugador.addEventListener("keyup", handlerInputJugador);
+botonModal.addEventListener("click", handlerModalClick);
 
 for (var i = 0; i < botones.length; i++) {
-  botones[i].addEventListener("click", handleButtonClick);
+  botones[i].addEventListener("click", handlerBotonClick);
 }
 
 botonInicio.addEventListener("click", iniciarJuego);
 botonPausa.addEventListener("click", togglePausa);
 botonReanudarModal.addEventListener("click", togglePausa);
 
-// Handler para el input del nombre del jugador
-function handleInputJugador(event) {
+function handlerInputJugador(event) {
   var nombreJugador = event.target.value;
   botonModal.disabled = nombreJugador.length < 3;
 }
 
-// Handler para el click del boton del modal
-function handleModalClick() {
+function handlerModalClick() {
   var nombreJugador = inputInfoJugador.value;
   localStorage.setItem("nombreJugador", nombreJugador);
   botonInicio.disabled = false;
@@ -58,8 +56,7 @@ function handleModalClick() {
   modal.classList.add("fade-out");
 }
 
-// Handler para los clicks de los botones
-function handleButtonClick(event) {
+function handlerBotonClick(event) {
   var boton;
   var indiceBoton;
   var esCorrecto;
@@ -88,7 +85,7 @@ function handleButtonClick(event) {
     pararTemporizador();
     generarSiguienteBoton();
     reiniciarTemporizador();
-    setTimeout(MostrarSecuencia, 2000);
+    setTimeout(mostrarSecuencia, 2000);
   }
 }
 
@@ -111,16 +108,16 @@ function checkearSecuencia() {
 }
 
 // Mostrar la sucuencia generada al jugador para que la repita
-function MostrarSecuencia() {
+function mostrarSecuencia() {
   var indice = 0;
   var intervalo;
   mostrandoSecuencia = true;
- 
+
   // recorro todos los botones para sacar la propiedad focus de cada uno
   for (const boton of botones) {
     boton.blur();
   }
-   intervalo = setInterval(function () {
+  intervalo = setInterval(function () {
     var indiceBoton = secuencia[indice];
     feedbackBoton(botones[indiceBoton - 1]);
 
@@ -148,45 +145,11 @@ function reiniciarTemporizador() {
   pararTemporizador();
 }
 
-// Iniciar el juego
-function iniciarJuego() {
-  if (juegoFinalizado) {
-    reiniciarJuego();
-  }
-
-  nivel = 1;
-  puntaje = 0;
-  secuencia = [];
-  secuenciaJugador = [];
-  puntajeValor.textContent = puntaje;
-  nivelValor.textContent = nivel;
-  botonInicio.disabled = true;
-  botonPausa.disabled = false;
-  timer = null;
-  infoTiempo.classList.remove("none");
-  obtenerMayorPuntaje();
-  calcularPenalizacion();
-  generarSiguienteBoton();
-  MostrarSecuencia();
-}
-
-// Funcion para finalizar el juego
-function terminarJuego() {
-  juegoFinalizado = true;
-  mensaje.innerHTML = "Fin del juego! <p> Tu puntaje: " + puntaje;
-  botonInicio.disabled = false;
-  botonPausa.disabled = true;
-  pararTemporizador();
-  calcularPenalizacion();
-  puntaje = puntaje - penalizacion;
-  guardarMayorPuntaje({ puntaje: puntaje, nivel: nivel, fecha: Date.now() });
-  juegoPausado = true;
-  modalEventos.classList.remove("none");
-  modalEventos.classList.add("fade-in");
-  modalEventos.classList.remove("fade-out");
-}
-
 // Funciones del temporizador
+function pararTemporizador() {
+  clearInterval(timer);
+}
+
 function iniciarTemporizador() {
   timer = setInterval(function () {
     tiempoRestante--;
@@ -200,45 +163,6 @@ function iniciarTemporizador() {
       terminarJuego();
     }
   }, 1000);
-}
-
-function pararTemporizador() {
-  clearInterval(timer);
-}
-
-// Pausa el juego
-function togglePausa() {
-  if (juegoFinalizado) {
-    modalEventos.classList.remove("fade-in-flex");
-    modalEventos.classList.add("fade-out");
-    reiniciarJuego();
-    return;
-  }
-
-  if (juegoPausado) {
-    juegoPausado = false;
-    modalEventos.classList.remove("fade-in-flex");
-    modalEventos.classList.add("fade-out");
-    botonPausa.textContent = "Pausa";
-    iniciarTemporizador();
-  } else {
-    juegoPausado = true;
-    botonPausa.textContent = "Continuar";
-
-    mensaje.textContent = "Juego en pausa";
-    modalEventos.classList.remove("none");
-    modalEventos.classList.remove("fade-out");
-    modalEventos.classList.add("fade-in-flex");
-    pararTemporizador();
-  }
-}
-
-// Reiniciar el juego
-function reiniciarJuego() {
-  juegoFinalizado = false;
-  juegoPausado = false;
-  reiniciarTemporizador();
-  iniciarJuego();
 }
 
 // Guardar el mayor puntaje en el local storage
@@ -289,4 +213,76 @@ function calcularPenalizacion() {
   if (tiempoRestante <= 9) {
     penalizacion = penalizacion + 10 - tiempoRestante;
   }
+}
+
+// Pausa el juego
+function togglePausa() {
+  if (juegoFinalizado) {
+    modalEventos.classList.remove("fade-in-flex");
+    modalEventos.classList.add("fade-out");
+    reiniciarJuego();
+    return;
+  }
+
+  if (juegoPausado) {
+    juegoPausado = false;
+    modalEventos.classList.remove("fade-in-flex");
+    modalEventos.classList.add("fade-out");
+    botonPausa.textContent = "Pausa";
+    iniciarTemporizador();
+  } else {
+    juegoPausado = true;
+    botonPausa.textContent = "Continuar";
+
+    mensaje.textContent = "Juego en pausa";
+    modalEventos.classList.remove("none");
+    modalEventos.classList.remove("fade-out");
+    modalEventos.classList.add("fade-in-flex");
+    pararTemporizador();
+  }
+}
+
+// Iniciar el juego
+function iniciarJuego() {
+  if (juegoFinalizado) {
+    reiniciarJuego();
+  }
+
+  nivel = 1;
+  puntaje = 0;
+  secuencia = [];
+  secuenciaJugador = [];
+  puntajeValor.textContent = puntaje;
+  nivelValor.textContent = nivel;
+  botonInicio.disabled = true;
+  botonPausa.disabled = false;
+  timer = null;
+  infoTiempo.classList.remove("none");
+  obtenerMayorPuntaje();
+  calcularPenalizacion();
+  generarSiguienteBoton();
+  mostrarSecuencia();
+}
+
+function terminarJuego() {
+  juegoFinalizado = true;
+  mensaje.innerHTML = "Fin del juego! <p> Tu puntaje: " + puntaje;
+  botonInicio.disabled = false;
+  botonPausa.disabled = true;
+  pararTemporizador();
+  calcularPenalizacion();
+  puntaje = puntaje - penalizacion;
+  guardarMayorPuntaje({ puntaje: puntaje, nivel: nivel, fecha: Date.now() });
+  juegoPausado = true;
+  modalEventos.classList.remove("none");
+  modalEventos.classList.add("fade-in");
+  modalEventos.classList.remove("fade-out");
+}
+
+// Reiniciar el juego
+function reiniciarJuego() {
+  juegoFinalizado = false;
+  juegoPausado = false;
+  reiniciarTemporizador();
+  iniciarJuego();
 }

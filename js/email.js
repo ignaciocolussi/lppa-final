@@ -8,12 +8,6 @@ var errorNombre = document.getElementById("errorNombre");
 var errorEmail = document.getElementById("errorEmail");
 var errorMensaje = document.getElementById("errorMensaje");
 
-botonEnviar.addEventListener("click", function(event) {
-    event.preventDefault();
-    enviarEmail();
-    }
-);
-
 function validarFormulario() {
     if(nombre.value === ""){
         errorNombre.innerHTML = "Debe ingresar un nombre";
@@ -45,7 +39,6 @@ function reiniciarValidaciones() {
     mensaje.classList.remove("invalid");
 }
 
-
 function enviarEmail() {
    reiniciarValidaciones();
     if(!validarFormulario()){
@@ -56,3 +49,8 @@ function enviarEmail() {
     form.reset();
 }
 
+botonEnviar.addEventListener("click", function(event) {
+    event.preventDefault();
+    enviarEmail();
+    }
+);
